@@ -72,6 +72,7 @@ struct Song
 	virtual std::string getComment(unsigned idx = 0) const;
 	virtual std::string getLength(unsigned idx = 0) const;
 	virtual std::string getPriority(unsigned idx = 0) const;
+	virtual std::string getControlValue(unsigned idx = 0) const;
 	
 	virtual std::string getTags(GetFunction f) const;
 	
@@ -79,6 +80,7 @@ struct Song
 	virtual unsigned getPosition() const;
 	virtual unsigned getID() const;
 	virtual unsigned getPrio() const;
+	virtual unsigned getCtrl() const;
 	virtual time_t getMTime() const;
 	
 	virtual bool isFromDatabase() const;

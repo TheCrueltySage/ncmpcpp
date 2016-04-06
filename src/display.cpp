@@ -71,6 +71,8 @@ const wchar_t *toColumnName(char c)
 			return L"Comment";
 		case 'P':
 			return L"Priority";
+		case 'O':
+			return L"Control";
 		default:
 			return L"?";
 	}

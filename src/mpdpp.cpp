@@ -527,6 +527,18 @@ void Connection::SetCrossfade(unsigned crossfade)
 	checkErrors();
 }
 
+void Connection::SetControlValue(const Song &s, int ctrl)
+{
+	prechecks();
+	if (m_command_list_active)
+		mpd_send_ctrl_id(m_connection.get(), ctrl, s.getID());
+	else
+	{
+		mpd_run_ctrl_id(m_connection.get(), ctrl, s.getID());
+		checkErrors();
+	}
+}
+
 void Connection::SetPriority(const Song &s, int prio)
 {
 	prechecks();

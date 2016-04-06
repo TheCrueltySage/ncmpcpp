@@ -194,6 +194,8 @@ MPD::Song::GetFunction charToGetFunction(char c)
 			return &MPD::Song::getComment;
 		case 'P':
 			return &MPD::Song::getPriority;
+		case 'O':
+			return &MPD::Song::getControlValue;
 		default:
 			return nullptr;
 	}

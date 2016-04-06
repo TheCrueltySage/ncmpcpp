@@ -243,6 +243,7 @@ void write_bindings(NC::Scrollpad &w)
 	key(w, Type::ClearMainPlaylist, "Clear playlist");
 	key(w, Type::CropMainPlaylist, "Clear playlist except selected item(s)");
 	key(w, Type::SetSelectedItemsPriority, "Set priority of selected items");
+	key(w, Type::SetSelectedItemsControlValue, "Set control value bitmask selected items [8421--]");
 	key(w, Type::MoveSelectedItemsUp, "Move selected item(s) up");
 	key(w, Type::MoveSelectedItemsDown, "Move selected item(s) down");
 	key(w, Type::MoveSelectedItemsTo, "Move selected item(s) to cursor position");

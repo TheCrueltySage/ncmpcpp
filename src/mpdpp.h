@@ -541,6 +541,7 @@ struct Connection
 	std::string GetReplayGainMode();
 	void SetReplayGainMode(ReplayGainMode);
 	
+	void SetControlValue(const MPD::Song &s, int control_value);
 	void SetPriority(const MPD::Song &s, int prio);
 	
 	int AddSong(const std::string &, int = -1); // returns id of added song

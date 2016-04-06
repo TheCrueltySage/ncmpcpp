@@ -2335,6 +2335,25 @@ void RefetchLyrics::run()
 	myLyrics->refetchCurrent();
 }
 
+bool SetSelectedItemsControlValue::canBeRun()
+{
+	return myScreen == myPlaylist && !myPlaylist->main().empty();
+}
+
+void SetSelectedItemsControlValue::run()
+{
+	using Global::wFooter;
+	
+	unsigned ctrl;
+	{
+		Statusbar::ScopedLock slock;
+		Statusbar::put() << "Set control value bitmask [0-16]: ";
+		ctrl = fromString<unsigned>(wFooter->prompt());
+		boundsCheck(ctrl, 0u, 255u);
+	}
+	myPlaylist->setSelectedItemsControlValue(ctrl);
+}
+
 bool SetSelectedItemsPriority::canBeRun()
 {
 	if (Mpd.Version() < 17)
@@ -2815,6 +2834,7 @@ void populateActions()
 	insert_action(new Actions::ToggleMediaLibrarySortMode());
 	insert_action(new Actions::FetchLyricsInBackground());
 	insert_action(new Actions::RefetchLyrics());
+	insert_action(new Actions::SetSelectedItemsControlValue());
 	insert_action(new Actions::SetSelectedItemsPriority());
 	insert_action(new Actions::ToggleOutput());
 	insert_action(new Actions::ToggleVisualizationType());

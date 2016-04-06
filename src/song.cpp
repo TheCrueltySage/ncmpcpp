@@ -204,6 +204,14 @@ std::string Song::getLength(unsigned idx) const
 		return "-:--";
 }
 
+std::string Song::getControlValue(unsigned idx) const
+{
+	assert(m_song);
+	if (idx > 0)
+		return "";
+	return boost::lexical_cast<std::string>(getCtrl());
+}
+
 std::string Song::getPriority(unsigned idx) const
 {
 	assert(m_song);
@@ -269,6 +277,12 @@ unsigned Song::getID() const
 {
 	assert(m_song);
 	return mpd_song_get_id(m_song.get());
+}
+
+unsigned Song::getCtrl() const
+{
+	assert(m_song);
+	return mpd_song_get_ctrl(m_song.get());
 }
 
 unsigned Song::getPrio() const

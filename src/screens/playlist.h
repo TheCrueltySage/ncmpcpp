@@ -73,6 +73,7 @@ struct Playlist: Screen<SongMenu>, Filterable, HasSongs, Searchable, Tabbable
 
 	void enableHighlighting();
 	
+	void setSelectedItemsControlValue(int ctrl);
 	void setSelectedItemsPriority(int prio);
 
 	bool checkForSong(const MPD::Song &s);

@@ -304,6 +304,16 @@ std::string Playlist::getTotalLength()
 	return result.str();
 }
 
+void Playlist::setSelectedItemsControlValue(int ctrl)
+{
+	auto list = getSelectedOrCurrent(w.begin(), w.end(), w.current());
+	Mpd.StartCommandsList();
+	for (auto it = list.begin(); it != list.end(); ++it)
+		Mpd.SetControlValue((*it)->value(), ctrl);
+	Mpd.CommitCommandsList();
+	Statusbar::print("Control value set");
+}
+
 void Playlist::setSelectedItemsPriority(int prio)
 {
 	auto list = getSelectedOrCurrent(w.begin(), w.end(), w.current());
