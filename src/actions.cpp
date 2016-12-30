@@ -2017,6 +2017,38 @@ void ApplyFilter::run()
 	listsChangeFinisher();
 }
 
+bool ApplyQueue::canBeRun()
+{
+	m_filterable = dynamic_cast<Filterable *>(myScreen);
+	return m_filterable != nullptr
+		&& m_filterable->allowsFiltering();
+}
+
+void ApplyQueue::run()
+{
+	using Global::wFooter;
+
+	std::string filter = m_filterable->currentFilter();
+	if (!filter.empty())
+	{
+		filter = "";
+		m_filterable->applyFilter(filter);
+		myScreen->refreshWindow();
+		Statusbar::printf("Disabling queue view");
+	}
+	else
+	{
+		m_filterable->applyFilter(filter);
+		myScreen->refreshWindow();
+		Statusbar::printf("Enabling queue view");
+	}
+
+	if (myScreen == myPlaylist)
+		myPlaylist->reloadTotalLength();
+
+	listsChangeFinisher();
+}
+
 bool Find::canBeRun()
 {
 	return myScreen == myHelp
@@ -2856,6 +2888,7 @@ void populateActions()
 	insert_action(new Actions::SortPlaylist());
 	insert_action(new Actions::ReversePlaylist());
 	insert_action(new Actions::ApplyFilter());
+	insert_action(new Actions::ApplyQueue());
 	insert_action(new Actions::Find());
 	insert_action(new Actions::FindItemForward());
 	insert_action(new Actions::FindItemBackward());

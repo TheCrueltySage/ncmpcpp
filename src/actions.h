@@ -124,6 +124,7 @@ enum class Type
 	SortPlaylist,
 	ReversePlaylist,
 	ApplyFilter,
+	ApplyQueue,
 	Find,
 	FindItemForward,
 	FindItemBackward,
@@ -1053,6 +1054,17 @@ private:
 struct ApplyFilter: public BaseAction
 {
 	ApplyFilter(): BaseAction(Type::ApplyFilter, "apply_filter") { }
+
+private:
+	virtual bool canBeRun() override;
+	virtual void run() override;
+
+	Filterable *m_filterable;
+};
+
+struct ApplyQueue: public BaseAction
+{
+	ApplyQueue(): BaseAction(Type::ApplyQueue, "apply_queue") { }
 
 private:
 	virtual bool canBeRun() override;
