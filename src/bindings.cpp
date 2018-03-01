@@ -644,6 +644,8 @@ void BindingsConfiguration::generateDefaults()
 		bind(k, Actions::Type::ReversePlaylist);
 	if (notBound(k = stringToKey("ctrl-f")))
 		bind(k, Actions::Type::ApplyFilter);
+	if (notBound(k = stringToKey("ctrl-w")))
+		bind(k, Actions::Type::ApplyQueue);
 	if (notBound(k = stringToKey("ctrl-_")))
 		bind(k, Actions::Type::SelectFoundItems);
 	if (notBound(k = stringToKey("/")))

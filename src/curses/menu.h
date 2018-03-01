@@ -335,6 +335,9 @@ struct Menu: Window, List
 	/// Sets highlighted position to 0
 	void reset();
 
+	/// Apply priority filter to items in the menu and sort by priority.
+	void applyPrioFilter();
+
 	/// Apply filter predicate to items in the menu and show the ones for which it
 	/// returned true.
 	template <typename PredicateT>

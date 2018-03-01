@@ -2021,7 +2021,9 @@ bool ApplyQueue::canBeRun()
 {
 	m_filterable = dynamic_cast<Filterable *>(myScreen);
 	return m_filterable != nullptr
-		&& m_filterable->allowsFiltering();
+		&& m_filterable->allowsFiltering()
+		&& myScreen == myPlaylist
+		&& !myPlaylist->main().empty();
 }
 
 void ApplyQueue::run()
@@ -2033,18 +2035,17 @@ void ApplyQueue::run()
 	{
 		filter = "";
 		m_filterable->applyFilter(filter);
-		myScreen->refreshWindow();
 		Statusbar::printf("Disabling queue view");
 	}
 	else
 	{
+		filter = "prio";
 		m_filterable->applyFilter(filter);
-		myScreen->refreshWindow();
 		Statusbar::printf("Enabling queue view");
 	}
 
-	if (myScreen == myPlaylist)
-		myPlaylist->reloadTotalLength();
+	myScreen->refreshWindow();
+	myPlaylist->reloadTotalLength();
 
 	listsChangeFinisher();
 }

@@ -211,6 +211,7 @@ void write_bindings(NC::Scrollpad &w)
 	w << '\n';
 	key(w, Type::ExecuteCommand, "Execute command");
 	key(w, Type::ApplyFilter, "Apply filter");
+	key(w, Type::ApplyQueue, "Apply queue ordering");
 	key(w, Type::FindItemForward, "Find item forward");
 	key(w, Type::FindItemBackward, "Find item backward");
 	key(w, Type::PreviousFoundItem, "Jump to previous found item");
