@@ -540,6 +540,8 @@ struct Connection
 
 	std::string GetReplayGainMode();
 	void SetReplayGainMode(ReplayGainMode);
+
+	void SendMessageToChannel(std::string channel, std::string message);
 	
 	void SetControlValue(const MPD::Song &s, int control_value);
 	void SetPriority(const MPD::Song &s, int prio);

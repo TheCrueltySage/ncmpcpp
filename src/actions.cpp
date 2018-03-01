@@ -2335,6 +2335,44 @@ void RefetchLyrics::run()
 	myLyrics->refetchCurrent();
 }
 
+bool SendItemToChannel::canBeRun()
+{
+	return myScreen == myPlaylist && !myPlaylist->main().empty();
+}
+
+void SendItemToChannel::run()
+{
+	using Global::wFooter;
+
+	std::string channel;
+	{
+		Statusbar::ScopedLock slock;
+		Statusbar::put() << "Select channel name: ";
+		channel = wFooter->prompt();
+	}
+	myPlaylist->sendItemToChannel(channel);
+}
+
+void SendMessageToChannel::run()
+{
+	using Global::wFooter;
+
+	std::string channel;
+	{
+		Statusbar::ScopedLock slock;
+		Statusbar::put() << "Select channel name: ";
+		channel = wFooter->prompt();
+	}
+	std::string message;
+	{
+		Statusbar::ScopedLock slock;
+		Statusbar::put() << "Type in the message to send: ";
+		message = wFooter->prompt();
+	}
+	Mpd.SendMessageToChannel(channel, message);
+	Statusbar::print("Message sent.");
+}
+
 bool SetSelectedItemsControlValue::canBeRun()
 {
 	return myScreen == myPlaylist && !myPlaylist->main().empty();
@@ -2343,7 +2381,7 @@ bool SetSelectedItemsControlValue::canBeRun()
 void SetSelectedItemsControlValue::run()
 {
 	using Global::wFooter;
-	
+
 	unsigned ctrl;
 	{
 		Statusbar::ScopedLock slock;
@@ -2834,6 +2872,8 @@ void populateActions()
 	insert_action(new Actions::ToggleMediaLibrarySortMode());
 	insert_action(new Actions::FetchLyricsInBackground());
 	insert_action(new Actions::RefetchLyrics());
+	insert_action(new Actions::SendItemToChannel());
+	insert_action(new Actions::SendMessageToChannel());
 	insert_action(new Actions::SetSelectedItemsControlValue());
 	insert_action(new Actions::SetSelectedItemsPriority());
 	insert_action(new Actions::ToggleOutput());

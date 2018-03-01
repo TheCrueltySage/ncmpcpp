@@ -73,6 +73,8 @@ struct Playlist: Screen<SongMenu>, Filterable, HasSongs, Searchable, Tabbable
 
 	void enableHighlighting();
 	
+	void sendItemToChannel(std::string channel);
+
 	void setSelectedItemsControlValue(int ctrl);
 	void setSelectedItemsPriority(int prio);
 

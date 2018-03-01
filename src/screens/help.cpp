@@ -242,6 +242,8 @@ void write_bindings(NC::Scrollpad &w)
 	key(w, Type::DeletePlaylistItems, "Delete selected item(s) from playlist");
 	key(w, Type::ClearMainPlaylist, "Clear playlist");
 	key(w, Type::CropMainPlaylist, "Clear playlist except selected item(s)");
+	key(w, Type::SendItemToChannel, "Send the IDs of selected songs to MPD channel");
+	key(w, Type::SendMessageToChannel, "Send a message to MPD channel");
 	key(w, Type::SetSelectedItemsPriority, "Set priority of selected items");
 	key(w, Type::SetSelectedItemsControlValue, "Set control value bitmask selected items [8421--]");
 	key(w, Type::MoveSelectedItemsUp, "Move selected item(s) up");

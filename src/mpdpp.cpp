@@ -527,6 +527,18 @@ void Connection::SetCrossfade(unsigned crossfade)
 	checkErrors();
 }
 
+void Connection::SendMessageToChannel(std::string channel, std::string message)
+{
+	prechecks();
+	if (m_command_list_active)
+		mpd_send_send_message(m_connection.get(), channel.c_str(), message.c_str());
+	else
+	{
+		mpd_run_send_message(m_connection.get(), channel.c_str(), message.c_str());
+		checkErrors();
+	}
+}
+
 void Connection::SetControlValue(const Song &s, int ctrl)
 {
 	prechecks();

@@ -140,6 +140,8 @@ enum class Type
 	ToggleMediaLibrarySortMode,
 	FetchLyricsInBackground,
 	RefetchLyrics,
+	SendItemToChannel,
+	SendMessageToChannel,
 	SetSelectedItemsControlValue,
 	SetSelectedItemsPriority,
 	ToggleOutput,
@@ -1201,11 +1203,30 @@ private:
 	virtual void run() override;
 };
 
+struct SendItemToChannel: BaseAction
+{
+	SendItemToChannel()
+	: BaseAction(Type::SendItemToChannel, "send_item_to_channel") { }
+
+private:
+	virtual bool canBeRun() override;
+	virtual void run() override;
+};
+
+struct SendMessageToChannel: BaseAction
+{
+	SendMessageToChannel()
+	: BaseAction(Type::SendMessageToChannel, "send_message_to_channel") { }
+
+private:
+	virtual void run() override;
+};
+
 struct SetSelectedItemsControlValue: BaseAction
 {
 	SetSelectedItemsControlValue()
 	: BaseAction(Type::SetSelectedItemsControlValue, "set_selected_items_control_value") { }
-	
+
 private:
 	virtual bool canBeRun() OVERRIDE;
 	virtual void run() OVERRIDE;
