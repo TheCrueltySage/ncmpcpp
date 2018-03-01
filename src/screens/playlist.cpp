@@ -188,8 +188,6 @@ std::string Playlist::currentFilter()
 	std::string result;
 	if (auto pred = w.filterPredicate<Regex::Filter<MPD::Song>>())
 		result = pred->constraint();
-	else if (auto pred = w.filterPredicate<std::string>())
-		result = pred;
 	return result;
 }
 
@@ -198,7 +196,10 @@ void Playlist::applyFilter(const std::string &constraint)
 	if (!constraint.empty())
 	{
 		if (constraint == "prio")
-			w.applyPrioFilter();
+			w.applyPrioFilter(Regex::Filter<MPD::Song>(
+			              constraint,
+			              Config.regex_type,
+			              playlistEntryMatcher));
 		else
 			w.applyFilter(Regex::Filter<MPD::Song>(
 			              constraint,
