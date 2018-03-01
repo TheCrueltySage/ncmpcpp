@@ -2022,8 +2022,7 @@ bool ApplyQueue::canBeRun()
 	m_filterable = dynamic_cast<Filterable *>(myScreen);
 	return m_filterable != nullptr
 		&& m_filterable->allowsFiltering()
-		&& myScreen == myPlaylist
-		&& !myPlaylist->main().empty();
+		&& myScreen == myPlaylist;
 }
 
 void ApplyQueue::run()
