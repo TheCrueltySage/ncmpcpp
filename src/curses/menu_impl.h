@@ -359,12 +359,9 @@ size_t Menu<ItemT>::choice() const
 template <typename ItemT> template <typename PredicateT>
 void Menu<ItemT>::applyPrioFilter(PredicateT &&pred)
 {
-	m_filter_predicate = std::forward<PredicateT>(pred);
 	m_filtered_items.clear();
 
-	for (const auto &item : m_all_items)
-		if (item.value().getPrio() > 0)
-			m_filtered_items.push_back(item);
+	applyFilter(std::forward<PredicateT>(pred));
 	std::sort(m_filtered_items.begin(), m_filtered_items.end(),
 			[](auto &a, auto &b)->bool{return (a.value().getPrio()>b.value().getPrio());});
 

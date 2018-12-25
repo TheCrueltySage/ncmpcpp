@@ -48,6 +48,7 @@ namespace {
 
 std::string songToString(const MPD::Song &s);
 bool playlistEntryMatcher(const Regex::Regex &rx, const MPD::Song &s);
+bool playlistPriorityFilter(const Regex::Regex /*&rx*/, const MPD::Song &s);
 
 }
 
@@ -199,7 +200,7 @@ void Playlist::applyFilter(const std::string &constraint)
 			w.applyPrioFilter(Regex::Filter<MPD::Song>(
 			              constraint,
 			              Config.regex_type,
-			              playlistEntryMatcher));
+			              playlistPriorityFilter));
 		else
 			w.applyFilter(Regex::Filter<MPD::Song>(
 			              constraint,
@@ -379,6 +380,11 @@ std::string songToString(const MPD::Song &s)
 bool playlistEntryMatcher(const Regex::Regex &rx, const MPD::Song &s)
 {
 	return Regex::search(songToString(s), rx, Config.ignore_diacritics);
+}
+
+bool playlistPriorityFilter(const Regex::Regex /*&rx*/, const MPD::Song &s)
+{
+	return (s.getPrio() > 0);
 }
 
 }
