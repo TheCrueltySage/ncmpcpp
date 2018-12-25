@@ -1228,8 +1228,8 @@ struct SetSelectedItemsControlValue: BaseAction
 	: BaseAction(Type::SetSelectedItemsControlValue, "set_selected_items_control_value") { }
 
 private:
-	virtual bool canBeRun() OVERRIDE;
-	virtual void run() OVERRIDE;
+	virtual bool canBeRun() override;
+	virtual void run() override;
 };
 
 struct SetSelectedItemsPriority: BaseAction
